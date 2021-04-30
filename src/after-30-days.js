@@ -13,9 +13,8 @@ const productsAtDayZero = [
 ];
 
 const carInsurance = new CarInsurance(productsAtDayZero);
-const productPrinter = function (product) {
-  console.log(`${product.name}, ${product.sellIn}, ${product.price}`);
-};
+const productPrinter = ({ name, sellIn, price }) =>
+  console.log(`${name}, ${sellIn}, ${price}`);
 
 for (let i = 1; i <= 30; i += 1) {
   console.log(`Day ${i}`);
