@@ -1,13 +1,11 @@
 const expect = require('chai').expect;
 
-const coTest = require('../src/models');
-const CarInsurance = coTest.CarInsurance;
-const Product = coTest.Product;
+const { Product, CarInsurance } = require('../src/models');
 
-describe('Co Test', function () {
-  it('should foo', function () {
-    const coTest = new CarInsurance([new Product('foo', 0, 0)]);
+describe('modelsTest', () => {
+  it('should decrement the price', () => {
+    const coTest = new CarInsurance([new Product('Medium Coverage', 2, 10)]);
     const products = coTest.updatePrice();
-    expect(products[0].name).equal('fixme');
+    expect(products[0].price).equal(9);
   });
 });
