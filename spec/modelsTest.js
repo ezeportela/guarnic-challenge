@@ -27,6 +27,12 @@ describe('modelsTest', () => {
     expect(product.price).equal(10);
   });
 
+  it('should continue because the price is 0', () => {
+    const coTest = new CarInsurance([new Product('Medium Coverage', 2, 0)]);
+    const [product] = coTest.updatePrice();
+    expect(product.price).equal(0);
+  });
+
   it('should not decrement the sellIn', () => {
     const coTest = new CarInsurance([new Product('Mega Coverage', 2, 10)]);
     const [product] = coTest.updatePrice();

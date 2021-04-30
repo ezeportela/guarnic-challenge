@@ -15,17 +15,18 @@ class CarInsurance {
     for (const product of this.products) {
       const { name, sellIn, price } = product;
 
+      if (name != 'Mega Coverage') {
+        product.sellIn -= 1;
+      }
+
+      if (price == 0) continue;
+
       if (
         !['Full Coverage', 'Special Full Coverage', 'Mega Coverage'].includes(
           name
-        ) &&
-        price > 0
+        )
       ) {
         product.price -= sellIn > 0 ? 1 : 2;
-      }
-
-      if (name != 'Mega Coverage') {
-        product.sellIn -= 1;
       }
     }
 
