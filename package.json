@@ -1,0 +1,16 @@
+{
+  "name": "guarnic-challenge",
+  "version": "1.0.0",
+  "description": "Software Engineer Test",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha spec/*.js",
+    "after-30-days": "node src/after-30-days"
+  },
+  "author": "Ezequiel Portela <eportelab@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^8.3.2"
+  }
+}
