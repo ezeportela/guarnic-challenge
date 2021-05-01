@@ -19,18 +19,40 @@ class CarInsurance {
         product.sellIn -= 1;
       }
 
-      if (price == 0) continue;
-
       if (
         !['Full Coverage', 'Special Full Coverage', 'Mega Coverage'].includes(
           name
-        )
+        ) &&
+        price > 0
       ) {
         product.price -= sellIn > 0 ? 1 : 2;
+
+        if (product.price < 0) product.price = 0;
       }
 
       if (name == 'Full Coverage' && price < 50) {
         product.price += 1;
+      }
+
+      if (name == 'Special Full Coverage') {
+        if (sellIn <= 0) {
+          product.price = 0;
+          continue;
+        }
+
+        switch (true) {
+          case sellIn > 5 && sellIn <= 10:
+            product.price += 2;
+            break;
+          case sellIn <= 5:
+            product.price += 3;
+            break;
+          default:
+            product.price += 1;
+            break;
+        }
+
+        if (product.price > 50) product.price = 50;
       }
     }
 
