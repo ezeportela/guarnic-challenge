@@ -113,4 +113,13 @@ describe('modelsTest', () => {
     });
     expect(product.price).equal(50);
   });
+
+  it('Super Sale - should decrement the price by 2', () => {
+    const [product] = testCarInsurance({
+      name: 'Super Sale',
+      sellIn: 3,
+      price: 6,
+    });
+    expect(product.price).equal(4);
+  });
 });

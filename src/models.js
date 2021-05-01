@@ -13,7 +13,7 @@ class CarInsurance {
 
   updatePrice() {
     for (const product of this.products) {
-      const { name, sellIn, price } = product;
+      const { name, price } = product;
 
       if (name != 'Mega Coverage') {
         product.sellIn -= 1;
@@ -25,7 +25,7 @@ class CarInsurance {
         ) &&
         price > 0
       ) {
-        product.price -= sellIn > 0 ? 1 : 2;
+        product.price -= product.sellIn < 0 || name == 'Super Sale' ? 2 : 1;
 
         if (product.price < 0) product.price = 0;
       }
@@ -35,16 +35,16 @@ class CarInsurance {
       }
 
       if (name == 'Special Full Coverage') {
-        if (sellIn <= 0) {
+        if (product.sellIn <= 0) {
           product.price = 0;
           continue;
         }
 
         switch (true) {
-          case sellIn > 5 && sellIn <= 10:
+          case product.sellIn > 5 && product.sellIn <= 10:
             product.price += 2;
             break;
-          case sellIn <= 5:
+          case product.sellIn <= 5:
             product.price += 3;
             break;
           default:
