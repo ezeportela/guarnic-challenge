@@ -28,6 +28,10 @@ class CarInsurance {
       ) {
         product.price -= sellIn > 0 ? 1 : 2;
       }
+
+      if (name == 'Full Coverage' && price < 50) {
+        product.price += 1;
+      }
     }
 
     return this.products;
