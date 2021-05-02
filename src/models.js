@@ -35,7 +35,7 @@ class CarInsurance {
       }
 
       if (name == 'Special Full Coverage') {
-        if (product.sellIn <= 0) {
+        if (product.sellIn < 0) {
           product.price = 0;
           continue;
         }
