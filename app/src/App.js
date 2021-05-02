@@ -35,19 +35,38 @@ const App = () => {
   });
 
   return (
-    <div className="App">
+    <div className="App navbar-fixed">
       <nav>
         <div className="nav-wrapper">
-          <span className="brand-logo left">Car Insurance App</span>
+          <span className="brand-logo">Car Insurance App</span>
         </div>
       </nav>
 
       <div className="container">
-        {productList.map((productList) => {
+        {productList.map(({ day, products }) => (
           <>
-            <h1>Día {productList.day}</h1>
-          </>;
-        })}
+            <h4>Day {day}</h4>
+            <table className="striped">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Sell In</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {products.map(({ name, sellIn, price }) => (
+                  <tr>
+                    <td>{name}</td>
+                    <td>{sellIn} days</td>
+                    <td>${price}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </>
+        ))}
       </div>
 
       <footer className="page-footer">
