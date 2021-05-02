@@ -1,18 +1,37 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
+import csv from 'csvtojson';
 
 const App = () => {
+  const [productList, setProductList] = useState([]);
+
   useEffect(() => {
-    fetch('./products_after_30_days.txt')
-      .then((file) => file.text())
-      .then((text) => {
-        console.log(
+    const fetchData = async () => {
+      if (productList.length === 0) {
+        const file = await fetch('./products_after_30_days.txt');
+        const text = await file.text();
+
+        const list = await Promise.all(
           text
             .split('Day')
             .filter((str) => str !== '')
-            .map((str) => str.split('\n'))
+            .map(async (str) => {
+              const lines = str.split('\n').reverse();
+              const day = lines.pop().trim();
+
+              const products = await csv({ trim: true }).fromString(
+                lines.reverse().join('\n')
+              );
+
+              return { day, products };
+            })
         );
-      });
+
+        setProductList(list);
+      }
+    };
+
+    fetchData();
   });
 
   return (
@@ -23,7 +42,13 @@ const App = () => {
         </div>
       </nav>
 
-      <div className="container"></div>
+      <div className="container">
+        {productList.map((productList) => {
+          <>
+            <h1>Día {productList.day}</h1>
+          </>;
+        })}
+      </div>
 
       <footer className="page-footer">
         <div className="container">© 2021 Ezequiel Portela</div>
